@@ -9,6 +9,14 @@ public:
     virtual void update(const string& message) = 0;
     virtual ~Observer() = default;};
 
+// Subject (класс, который уведомляет наблюдателя)
+class Subject{
+public:
+    virtual void addObserver(Observer* observer) = 0;
+    virtual void removeObserver() = 0;
+    virtual void notifyObserver(const string& message) = 0;
+    virtual ~Subject() = default;};
+
 //класс номеров
 class Room{
 public:
@@ -46,17 +54,25 @@ private:
     string checkOutDate;
     Room* room;  //указатель на объект класса Room
     int numberOfPeople;
-    Observer* observer1;  //наблюдатель
+    Observer* observer = nullptr; //наблюдатель
 
 public:
     //конструктор
-   Booking(const string& name, const string& phone, const string& checkIn, const string& checkOut, Room* room, int people)
-    : fullName(name), phoneNumber(phone), checkInDate(checkIn), checkOutDate(checkOut), room(room), numberOfPeople(people){}
-
+  Booking(const string& name, const string& phone, const string& checkIn, const string& checkOut, Room* room, int people)
+        : fullName(name), phoneNumber(phone), checkInDate(checkIn), checkOutDate(checkOut), room(room), numberOfPeople(people){}
 
     //метод добавления наблюдателя
-    void addObserver1(Observer* observer){
-        observer1 = observer;}
+    void addObserver(Observer* newObserver) override{
+        observer = newObserver;}
+
+    //метод удаление наблюдателя
+    void removeObserver() override{
+        observer = nullptr;}
+
+    //уведомление наблюдателя
+    void notifyObserver(const string& message) override{
+        if(observer){
+            observer->update(message);}}
 
     //метод подтверждения брони
     void confirmBooking(){
@@ -67,7 +83,7 @@ public:
         cout << "Дата выезда: " << checkOutDate << endl;
         
         //уведомляем наблюдателя
-        if(observer1) observer1->update("\nБронирование подтверждено для: " + fullName);}
+        notifyObserver("\nБронирование подтверждено для: " + fullName);}
 
     //деструктор
     ~Booking(){
