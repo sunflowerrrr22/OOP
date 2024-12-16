@@ -2,4 +2,6 @@
 сроков проживания, реализация методов создания различных номеров, а так же конструирование заказа.
 
 UML-диаграмма:
-![UML](https://github.com/user-attachments/assets/5b3f66e4-04c6-4107-806e-7784158a3b4d)
+![Снимок экрана 2024-12-16 232430](https://github.com/user-attachments/assets/20918a75-fd27-40d0-a61b-82c7aefadb26)
+
+
