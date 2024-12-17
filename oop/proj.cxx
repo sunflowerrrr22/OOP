@@ -46,7 +46,7 @@ public:
             throw invalid_argument("Пожалуйста, введите 'Люкс' или 'Эконом'");}}};
 
 //класс брони
-class Booking{
+class Booking: public Subject{{
 private:
     string fullName;
     string phoneNumber;
